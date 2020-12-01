@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
+{% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Album example · Bootstrap</title>
+    <title>My blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
 
@@ -47,20 +48,20 @@
     <header>
  <nav class="navbar navbar-expand-lg navbar-light font-italic"
  style = "background-color: #047bfe" >
-  <a class="navbar-brand"  style = "color: #fff" href="#">My blog!</a>
+  <a class="navbar-brand"  style = "color: #fff" href="{% url 'home' %}">My blog!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" style = "color: #fff href="#">About me</a>
+        <a class="nav-link" style = "color: #fff"  href="{% static 'about_me.txt' %}">About me</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style = "color: #fff href="#">Facebook</a>
+        <a class="nav-link" style = "color: #fff" target="_blank" rel="noopener noreferrer"href="https://web.facebook.com/profile.php?id=100056675383747">Facebook</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" style = "color: #fff href="#">Blog</a>
+        <a class="nav-link" style = "color: #fff" href="#">Blog</a>
       </li>
     </ul>
   </div>
@@ -78,8 +79,10 @@
     </div>
   </section>
         {% for blog in blogs.all %}
+           <a href="{% url 'post_details' blog.id %}"><h1>{{blog.title}}</h1></a>
+            <h1>{{blog.date}}</h1>
             <img src = "{{ blog.image.url }}"/>
-              <h1>{{blog.text}}</h1>
+            <p>{{blog.get_summary}}</p>
         {% endfor %}
 </main>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
